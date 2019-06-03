@@ -13,7 +13,7 @@ export class Player {
   }
   getBrainsAmount() {
     let amount = 0;
-    for(let brain in brainCooler.inventory) {
+    for(let brain in this.getInventory()) {
       amount += brain.size;
     }
     return amount;

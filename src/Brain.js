@@ -7,7 +7,7 @@ const brains = {
 export class Brain {
   constructor() {
     let brainOptions = ["small", "medium", "large"];
-    let thisBrain = brainOptions[Math.floor(Math.random(brainOptions.length))];
+    let thisBrain = brainOptions[Math.floor(Math.random() * brainOptions.length)];
     this.size = thisBrain;
     this.value = brains[thisBrain];
   }

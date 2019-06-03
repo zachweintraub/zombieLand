@@ -14,6 +14,8 @@ describe('Player', function () {
     expect(player.brainCooler.capacity).toEqual(10);
   });
   it('should collect brain when capacity allows', function() {
-    
+    let brain = new Brain();
+    player.collectBrain(brain);
+    expect(player.getInventory().length).toEqual(1);
   });
 })

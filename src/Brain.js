@@ -1,7 +1,7 @@
 const brains = {
-  small: 0.5,
-  medium: 0.75,
-  large: 1
+  small: 5,
+  medium: 7.5,
+  large: 10
 }
 
 export class Brain {

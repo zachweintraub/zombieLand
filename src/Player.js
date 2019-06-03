@@ -31,12 +31,14 @@ export class Player {
   collectBrain(brain) {
     if(this.doesBrainFit(brain)) {
       this.brainCooler.inventory.push(brain);
+      return true;
     } else {
       return false;
     }
   }
 
-  feed(zombie, brain) {
+  feed(zombie) {
+    let brain = this.brainCooler.inventory.pop();
     zombie.eat(brain);
   }
 }

@@ -24,21 +24,18 @@ function gameStart(name) {
 }
 
 function getHungerLevel() {
-  console.log(`brain level ${zombie.brainLevel}`);
-  if (zombie.brainLevel > 8) {
+  // console.log(`brain level ${zombie.brainLevel}`);
+  if (zombie.brainLevel > 80) {
     return "not";
-  } else if (zombie.brainLevel > 5) {
+  } else if (zombie.brainLevel > 50) {
     return "somewhat";
-  } else if (zombie.brainLevel > 3 ) {
+  } else if (zombie.brainLevel > 30 ) {
     return "extremely";
   } else {
     return "critically";
   }
 }
 
-function getRemainingTime() {
-  return zombie.brainLevel * 10;
-}
 function getCoolerLevel() {
   if (player.getInventory().length == 0) {
     return 0;
@@ -50,25 +47,39 @@ function getCoolerLevel() {
 function display() {
   $('#console').text();
   $('#zombieHunger').text(getHungerLevel());
-  $('#timeRemaining').text(getRemainingTime());
+  $('#timeRemaining').text(zombie.brainLevel);
   $('#playerName').text(player.name);
   $('#brainCooler').text(getCoolerLevel());
   if (player.getInventory() != 0) {
-    for(brain in player.getInventory()) {
+    for(let brain in player.getInventory()) {
+      $('#coolerContents').empty();
       $('#coolerContents').append(`<li>${brain.size} brain</li>`);
     }
   }
 }
 
-
-
-
 $(function(){
   $('#form').submit(function(e) {
     e.preventDefault();
     gameStart($('#name').val());
-    display();
+    let displayLoop = setInterval(function() {
+      display();
+    }, 1000);
 
   });
-  
+  $('#feed').click(function() {
+    if(player.getInventory() == 0){
+      alert("You have no brains to feed the zombie");
+    } else {
+      player.feed(zombie);
+    }
+    display();
+  });
+  $('#getBrain').click(function() {
+    let brain = new Brain();
+    if(!player.collectBrain(brain)){
+      alert("Your cooler is full!");
+    };
+    display();
+  })
 });

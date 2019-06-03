@@ -19,12 +19,11 @@ function gameStart(name) {
   $('#zombie').show();
   $('#player').show();
   $('#console').show();
-  // console.log("zombie hunger " + zombie.brainLevel);
+  display();
 
 }
 
 function getHungerLevel() {
-  // console.log(`brain level ${zombie.brainLevel}`);
   if (zombie.brainLevel > 80) {
     return "not";
   } else if (zombie.brainLevel > 50) {
@@ -37,10 +36,11 @@ function getHungerLevel() {
 }
 
 function getCoolerLevel() {
+  console.log(player.getBrainsAmount());
   if (player.getInventory().length == 0) {
     return 0;
   } else {
-    return (player.getBrainsAmount() / player.capacity * 100).toFixed(2);
+    return player.getBrainsAmount() / player.brainCooler.capacity;
   }
 }
 
@@ -50,12 +50,16 @@ function display() {
   $('#timeRemaining').text(zombie.brainLevel);
   $('#playerName').text(player.name);
   $('#brainCooler').text(getCoolerLevel());
-  if (player.getInventory() != 0) {
+}
+
+function displayBrains() {
+  $('#coolerContents').empty();
+  if (player.getInventory().length > 0) {
     for(let brain in player.getInventory()) {
-      $('#coolerContents').empty();
       $('#coolerContents').append(`<li>${brain.size} brain</li>`);
     }
   }
+
 }
 
 $(function(){
@@ -73,13 +77,14 @@ $(function(){
     } else {
       player.feed(zombie);
     }
+    displayBrains();
     display();
   });
   $('#getBrain').click(function() {
     let brain = new Brain();
-    if(!player.collectBrain(brain)){
-      alert("Your cooler is full!");
-    };
+    console.log(brain.size + "and" + brain.value);
+    player.collectBrain(brain);
+    displayBrains();
     display();
   })
 });

@@ -5,7 +5,7 @@ export class Player {
   constructor(name) {
     this.name = name;
     this.brainCooler = {
-      capacity: 10,
+      capacity: 100,
       inventory: []
     };
   }
@@ -15,6 +15,7 @@ export class Player {
   getBrainsAmount() {
     let amount = 0;
     for(let brain in this.getInventory()) {
+      console.log(`brain value is ${brain.value}`);
       amount += brain.value;
     }
     return amount;

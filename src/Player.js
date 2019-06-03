@@ -1,4 +1,5 @@
 import { Brain } from './Brain';
+import { Zombie } from './Zombie';
 
 export class Player {
   constructor(name) {
@@ -14,13 +15,13 @@ export class Player {
   getBrainsAmount() {
     let amount = 0;
     for(let brain in this.getInventory()) {
-      amount += brain.size;
+      amount += brain.value;
     }
     return amount;
   }
 
   doesBrainFit(brain) {
-    if (this.getBrainsAmount() + brain.size > this.brainCooler.capacity) {
+    if (this.getBrainsAmount() + brain.value > this.brainCooler.capacity) {
       return false;
     } else {
       return true;
@@ -33,5 +34,9 @@ export class Player {
     } else {
       return false;
     }
+  }
+
+  feed(zombie, brain) {
+    zombie.eat(brain);
   }
 }

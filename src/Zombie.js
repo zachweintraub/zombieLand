@@ -5,11 +5,21 @@ export class Zombie {
   }
   setHunger() {
     const hungerInterval = setInterval(() => {
-      this. brainLevel--;
-      if (this.didYouGetEaten() == true) {
+      this.brainLevel--;
+      if (this.didYouEatPlayer() == true) {
         clearInterval(hungerInterval);
-        return "You got eaten!";
+        return "Player taste good";
       }
     }, 10000);
+  }
+  didYouEatPlayer() {
+    if (this.brainLevel <= 0){
+      return true;
+    } else {
+      return false;
+    }
+  }
+  eat(brain) {
+    this.brainLevel += brain.value;
   }
 }

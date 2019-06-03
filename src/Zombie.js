@@ -1,7 +1,7 @@
 export class Zombie {
   constructor(name) {
     this.name = name;
-    this.brainLevel = 5;
+    this.brainLevel = 6;
   }
   setHunger() {
     const hungerInterval = setInterval(() => {
@@ -10,6 +10,7 @@ export class Zombie {
         clearInterval(hungerInterval);
         return "Player taste good";
       }
+      // console.log("zombie "+ this.brainLevel);
     }, 10000);
   }
   didYouEatPlayer() {

@@ -7,7 +7,7 @@ export class Player {
     this.brainCooler = {
       capacity: 10,
       inventory: []
-    }
+    };
   }
   getInventory() {
     return this.brainCooler.inventory;

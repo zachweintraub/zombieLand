@@ -6,4 +6,4 @@ describe('Player', function () {
     let brainSizes = [0.5, 0.75, 1];
     expect(brainSizes).toContain(brain.value);
   });
-})
+});

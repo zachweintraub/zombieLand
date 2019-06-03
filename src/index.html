@@ -4,9 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Webpack Template</title>
+  <title>ZombieLand</title>
 </head>
 <body>
-  <h1>Webpack Template</h1>
+
+  <h1>Feed or Die!</h1>
+  <div id='intro'>
+      <p>You must keep the zombie fed before he devours your family.  Harvest brains at your local graveyard and bring them back to your zombie.</p>
+    </div>  
+  <form id='form'>
+    <label for='name' name='name'>Name</label>
+    <input type='text' id='name'>
+    <button type='submit' class='btn btn-info'>Start</button>
+  </form>
+  <div id='game'>
+    <div id='location'>
+
+    </div>
+    <div id='console'>
+      <h1>Console</h1>
+    </div>
+    <div id='zombie'>
+      <h2 id='zombieName'></h2>
+      <p>Your zombie is <span id='zombieHunger'></span> hungry.</p>
+      <p>Your family is <span id='timeRemaining'></span> minutes away from being eaten.</p>
+    </div>
+    <div id='player'>
+      <h2 id='playerName'></h2>
+      <p>Your cooler is <span id='brainCooler'></span>% full and contains the following:</p>
+      <ul id="coolerContents"></ul>
+    </div>
+  </div>
 </body>
 </html>

@@ -36,11 +36,11 @@ function getHungerLevel() {
 }
 
 function getCoolerLevel() {
-  console.log(player.getBrainsAmount());
+  // console.log(player.getBrainsAmount());
   if (player.getInventory().length == 0) {
     return 0;
   } else {
-    return player.getBrainsAmount() / player.brainCooler.capacity;
+    return player.getBrainsAmount() / player.brainCooler.capacity * 100;
   }
 }
 
@@ -54,9 +54,12 @@ function display() {
 
 function displayBrains() {
   $('#coolerContents').empty();
-  if (player.getInventory().length > 0) {
-    for(let brain in player.getInventory()) {
-      $('#coolerContents').append(`<li>${brain.size} brain</li>`);
+  let brainArray = player.getInventory();
+  if (brainArray.length > 0) {
+
+    for(let i=0; i < brainArray.length; i++) {
+      
+      $('#coolerContents').append(`<li>${brainArray[i].size} brain</li>`);
     }
   }
 
@@ -82,7 +85,7 @@ $(function(){
   });
   $('#getBrain').click(function() {
     let brain = new Brain();
-    console.log(brain.size + "and" + brain.value);
+    // console.log(brain.size + "and" + brain.value);
     player.collectBrain(brain);
     displayBrains();
     display();

@@ -14,9 +14,9 @@ export class Player {
   }
   getBrainsAmount() {
     let amount = 0;
-    for(let brain in this.getInventory()) {
-      console.log(`brain value is ${brain.value}`);
-      amount += brain.value;
+    let brainArray = this.getInventory();
+    for(let i=0; i < brainArray.length; i++) {
+      amount += brainArray[i].value;
     }
     return amount;
   }

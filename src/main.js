@@ -62,11 +62,11 @@ function displayBrains() {
 }
 
 function dig(ind) {
-  graveyard[ind]++;
-  if(graveyard[ind] > 9) {
+  if(graveyard[ind] > 8) {
     $(`#site${ind}`).attr('src', 'images/brain.png');
     $(`#site${ind}`).attr('class', 'brain');
   }
+  graveyard[ind]++;
 }
 
 function stealBrain(ind) {
@@ -76,16 +76,16 @@ function stealBrain(ind) {
   $(`#site${ind}`).attr('class', 'hole');
 }
 
-function attachListeners() {
-  $('.graveyard').on("click", '.brain', function(){
-    console.log('brain clicked');
-    stealBrain(this.id[this.id.length-1]);
-    displayBrains();
-  });
-}
+// function attachListeners() {
+//   $('.graveyard').on("click", '.brain', function(){
+//     console.log('brain clicked');
+//     console.log(this);
+//     stealBrain(this.id[this.id.length-1]);
+//     displayBrains();
+//   });
+// }
 
-$(function(){
-  attachListeners();
+$(document).ready(function(){
   $('#form').submit(function(e) {
     e.preventDefault();
     gameStart($('#name').val());
@@ -112,6 +112,12 @@ $(function(){
   });
   $('.grave').click(function(){
     dig(this.id[this.id.length-1]);
+  });
+  $('img').click(function(){
+    if($(this).attr('class') == 'brain') {
+      stealBrain(this.id[this.id.length-1]);
+      displayBrains();
+    }
   });
 
 });

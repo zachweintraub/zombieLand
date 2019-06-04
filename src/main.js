@@ -5,7 +5,7 @@ import './styles.css';
 import { Player } from './../src/Player';
 import {Zombie} from './../src/Zombie';
 import { Brain } from './../src/Brain';
-
+// import grave from './../src/img/grave.png';
 
 var player;
 var zombie;
@@ -36,12 +36,7 @@ function getHungerLevel() {
 }
 
 function getCoolerLevel() {
-  // console.log(player.getBrainsAmount());
-  if (player.getInventory().length == 0) {
-    return 0;
-  } else {
-    return player.getBrainsAmount() / player.brainCooler.capacity * 100;
-  }
+    return player.brainCooler.capacity - player.getInventory().length;
 }
 
 function display() {

@@ -5,7 +5,7 @@ export class Player {
   constructor(name) {
     this.name = name;
     this.brainCooler = {
-      capacity: 100,
+      capacity: 10,
       inventory: []
     };
   }
@@ -21,8 +21,9 @@ export class Player {
     return amount;
   }
 
-  doesBrainFit(brain) {
-    if (this.getBrainsAmount() + brain.value > this.brainCooler.capacity) {
+  doesBrainFit() {
+    // if (this.getBrainsAmount() + 1 > this.brainCooler.capacity) {
+      if (this.getInventory().length + 1 > this.brainCooler.capacity) {
       return false;
     } else {
       return true;
@@ -30,7 +31,7 @@ export class Player {
   }
 
   collectBrain(brain) {
-    if(this.doesBrainFit(brain)) {
+    if(this.doesBrainFit()) {
       this.brainCooler.inventory.push(brain);
       return true;
     } else {

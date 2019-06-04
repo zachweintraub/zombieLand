@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/main.js',
@@ -20,7 +21,10 @@ module.exports = {
       title: 'Webpack Template',
       template: './src/index.html',
       inject: 'body'
-    })
+    }),
+    new CopyWebpackPlugin([
+      {from:'src/images',to:'images'} 
+  ]), 
   ],
   mode: 'development',
   module: {
@@ -42,6 +46,16 @@ module.exports = {
         options: {
           presets: ['es2015']
         }
+      },
+      {
+        test: /\.(png|jp(e*)g|svg)$/,  
+        use: [{
+            loader: 'url-loader',
+            options: { 
+                limit: 10000, // Convert images < 8kb to base64 strings
+                name: 'img/[hash]-[name].[ext]'
+            } 
+        }]
       }
     ]
   }

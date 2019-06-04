@@ -10,6 +10,8 @@ import { Brain } from './../src/Brain';
 var player;
 var zombie;
 
+var graveyard = [0,0,0,0,0,0,0,0,0,0];
+
 function gameStart(name) {
   $('#form').hide();
   player = new Player(name);
@@ -57,10 +59,33 @@ function displayBrains() {
       $('#coolerContents').append(`<li>${brainArray[i].size} brain</li>`);
     }
   }
+}
 
+function dig(ind) {
+  graveyard[ind]++;
+  if(graveyard[ind] > 9) {
+    $(`#site${ind}`).attr('src', 'images/brain.png');
+    $(`#site${ind}`).attr('class', 'brain');
+  }
+}
+
+function stealBrain(ind) {
+  let thisBrain = new Brain();
+  player.collectBrain(thisBrain);
+  $(`#site${ind}`).attr('src', 'images/hole.jpeg');
+  $(`#site${ind}`).attr('class', 'hole');
+}
+
+function attachListeners() {
+  $('.graveyard').on("click", '.brain', function(){
+    console.log('brain clicked');
+    stealBrain(this.id[this.id.length-1]);
+    displayBrains();
+  });
 }
 
 $(function(){
+  attachListeners();
   $('#form').submit(function(e) {
     e.preventDefault();
     gameStart($('#name').val());
@@ -84,5 +109,9 @@ $(function(){
     player.collectBrain(brain);
     displayBrains();
     display();
-  })
+  });
+  $('.grave').click(function(){
+    dig(this.id[this.id.length-1]);
+  });
+
 });
